@@ -1,0 +1,65 @@
+CREATE TABLE user(
+    personal_id CHAR(11) NOT NULL PRIMARY KEY,
+	user_name VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    surname VARCHAR(255)
+); 
+
+CREATE TABLE bankAcc(
+	bankAccNo VARCHAR NOT NULL PRIMARY KEY,
+	personal_id VARCHAR NOT NULL REFERENCES user (personal_id),
+	balance REAL DEFAULT 0.00,
+	acc_type VARCHAR (255) NOT NULL
+);
+
+CREATE TABLE transaction(
+	bankAccNo varchar NOT NULL REFERENCES bankAcc (bankAccNo),
+	amount REAL,
+	destination VARCHAR(255),
+	date DATE NOT NULL,
+	time TIME NOT NULL
+);
+
+CREATE TABLE creditAcc(
+	bankAccNo varchar NOT NULL REFERENCES bankAcc (bankAccNo),
+	negative_amount_date DATE NOT NULL,
+	credit_amount REAL DEFAULT -300.00,
+	interest REAL DEFAULT 3.00
+);
+
+INSERT INTO user VALUES
+('30000000009', 'as', 'pass', 'Pinigu', 'Mociute'),
+('30000000008', 'katukas616', 'pass', 'katinas', 'batauskas'),
+('40000000009', 'useris1', 'pass', 'snieguole', 'nykstukyte'),
+('40000000002', 'useris2', 'pass', 'mama', 'ponas'),
+('30000000003', 'useris3', 'pass', 'tetis', 'ponas'),
+('40000000001', 'useris4', 'pass', 'brolis', 'ponas');
+
+INSERT INTO bankAcc VALUES
+('LT4856757261', '30000000009', 0.0, 'debit'),
+('LT8042166191', '30000000008', 119.0, 'debit'),
+('LT5016690691', '40000000009', 18.0, 'debit'),
+('LT9603956191', '40000000002', -50.0, 'credit'),
+('LT3765417671', '30000000003', -30.0, 'debit'),
+('LT3922327241', '40000000009', 1000.0, 'debit'),
+('LT5546929641', '30000000003', 0.0, 'credit'),
+('LT9165719681', '40000000009', 0.0, 'credit');
+
+
+INSERT INTO transaction VALUES
+('LT4856757261', 40.0, 'įnešimas', '2020-03-30', '21:11:40'),
+('LT8042166191', -150.0, 'pervedimas į LT8946514311', '2020-03-30', '21:11:40'),
+('LT4856757261', 60.0, 'įnešimas', '2020-03-29', '21:11:40'),
+('LT5016690691', 44.0, 'išėmimas', '2020-03-29', '21:24:56'),
+('LT9603956191', -40.0, 'įnešimas', '2020-03-29', '21:11:40'),
+('LT4856757261', -34.0, 'išėmimas', '2020-03-28', '21:39:24'),
+('LT4856757261', 40.0, 'įnešimas', '2020-03-28', '21:11:40'),
+('LT3922327241', -340.0, 'išėmimas', '2020-03-28', '21:11:40'),
+('LT4856757261', 40.0, 'įnešimas', '2020-03-30', '00:21:24'),
+('LT9165719681', -69.0, 'išėmimas', '2020-03-30', '21:11:40');
+
+INSERT INTO creditAcc VALUES
+('LT9603956191', '2020-03-29', -300.00, 3.00),
+('LT5546929641', '2020-03-30', -300.00, 3.00),
+('LT9165719681', '2020-02-29', -300.00, 3.00);
