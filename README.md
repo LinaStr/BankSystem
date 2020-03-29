@@ -3,7 +3,7 @@ Banko sistemos kūrimas mokantis sql DB
 
 
 Dar neimplementuota kreditų sistema. Visos sąskaitos gali eit į minusą.
-
+____________________
 Padaryta:
 1. Suprojektuoti duomenų bazę;
 2. Sukurti lenteles ir įdėti įrašus;
@@ -16,6 +16,7 @@ Padaryta:
     v. Padaryti pavedimą
     vi. Išeksportuoti transakcijų istoriją už norimą datą į failą (t.y. Visas
 tranzakcijas atliktas 2020-01-20 - 2020-02-02)
+____________________
 
 Reikia dar preventinti debetų transakcijas jei balansas gaunasi minusinis.
 Kreditų acc lentelėje fiksuoti datą kada pirmą kartą balansas patapo minusinis ir ištrinti iš duombazės kreditų acc lentelės, kai minusinė 
